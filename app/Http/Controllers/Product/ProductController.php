@@ -173,6 +173,7 @@ class ProductController extends Controller
                 <td class="px-0 text-dark fw-medium text-end">৳ '.$val->purchase_price.'/-</td>
                 <td class="px-0 text-dark fw-medium text-end">৳ '.$val->price.'/-</td>
                 <td class="px-0 text-dark fw-medium text-end">৳ '.$val->stock * $val->price.'/-</td>
+                <td class="px-0 text-dark fw-medium text-end"><a href="'.$edit.'" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit text-primary"></i></a></td>
             </tr>';
         }
         return response($output);

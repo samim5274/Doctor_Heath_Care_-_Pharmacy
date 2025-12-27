@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between mt-4">
-                                        <a href="{{url('/edit-product-view')}}"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
+                                        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
                                         <button type="submit" class="btn btn-success">Edit Medicine</button>
                                     </div>
                                 </form>

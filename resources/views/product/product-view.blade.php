@@ -85,7 +85,7 @@
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->purchase_price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->stock * $val->price}}/-</td>
-                                                <td class="px-0 text-dark fw-medium text-end"><a href="{{url('/edit-product/'.$val->id)}}"><i class="fas fa-edit text-primary"></i></a></td>
+                                                <td class="px-0 text-dark fw-medium text-end"><a href="{{url('/edit-product/'.$val->id)}}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit text-primary"></i></a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -146,9 +146,9 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="purchaseprice" class="form-label">Purchase Price (৳)</label>
-                            <input type="number" name="purchaseprice" class="form-control" id="purchaseprice" step="0.01" required>
+                            <input type="number" name="purchaseprice" class="form-control" id="purchaseprice" step="0.01" value="0" required>
                         </div>
 
                         <div class="col-md-6">
