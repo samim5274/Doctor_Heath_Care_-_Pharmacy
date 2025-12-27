@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $company->name ?? "D.H.C Pharmacy" }}</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/main-icon.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/dhcpharmacy.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 
@@ -102,7 +102,7 @@
                                     <input type="text" class="form-control mb-2" hidden value="{{ $reg }}" name="txtReg">
 
                                     <h5 class="mb-3">Order ID: ORD-{{ $reg }}</h5>
-                                    <p class="mb-1"><strong>Location:</strong> <i class="mdi mdi-map-marker"></i> Uttara, Dhaka-1230</p>
+                                    <p class="mb-1"><strong>Location:</strong> <i class="mdi mdi-map-marker"></i> {{ $company->address ?? "N/A" }}</p>
                                     <hr>
 
                                     <div class="d-flex justify-content-between mb-2">

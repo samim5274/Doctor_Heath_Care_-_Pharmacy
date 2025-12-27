@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/main-icon.png" />
+    <title>{{ $company->name ?? "Login" }}</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/dhcpharmacy.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 </head>
@@ -22,7 +22,7 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="{{url('/')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="./assets/images/logos/main-icon.png" alt="" width="40">
+                                    <img src="./assets/images/logos/dhcpharmacy.png" alt="" width="40">
                                     </a>
                                 <p class="text-center">Your Social Campaigns</p>
                                 @include('message.message')

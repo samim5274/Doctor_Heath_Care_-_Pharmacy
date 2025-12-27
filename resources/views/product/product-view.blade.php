@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $company->name ?? "D.H.C Pharmacy" }}</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/main-icon.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/dhcpharmacy.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 </head>
@@ -67,7 +67,7 @@
                                         <tbody class="allData">
                                             @foreach($product as $key => $val)
                                             <tr>
-                                                <td>{{ $key + 1 }}</td>
+                                                <!-- <td>{{ $key + 1 }}</td> -->
                                                 <td class="px-0">
                                                     <div class="d-flex align-items-center">
                                                         <!-- <img src="#" class="rounded-circle" width="40" alt="flexy" /> -->
@@ -85,6 +85,7 @@
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->purchase_price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->stock * $val->price}}/-</td>
+                                                <td class="px-0 text-dark fw-medium text-end"><a href="{{url('/edit-product/'.$val->id)}}"><i class="fas fa-edit text-primary"></i></a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -152,18 +153,18 @@
 
                         <div class="col-md-6">
                             <label for="price" class="form-label">Sale Price (৳)</label>
-                            <input type="number" name="price" class="form-control" id="price" step="0.01" required>
+                            <input type="number" name="price" min="0" class="form-control" id="price" step="0.01" required>
                         </div>
 
                         <div class="col-md-6">
                             <label for="stock" class="form-label">Stock Quantity</label>
-                            <input type="number" name="stock" class="form-control" id="stock" required>
+                            <input type="number" name="stock" min="0" class="form-control" id="stock" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="manufacture_date" class="form-label">Manufacture Date</label>
-                            <input type="date" name="manufacture_date" class="form-control" id="manufacture_date" value="{{ date('Y-m-d') }}" required>
-                        </div>
+                        </div> -->
+                        <input type="date" hidden name="manufacture_date" class="form-control" id="manufacture_date" value="{{ date('Y-m-d') }}" required>
 
                         <div class="col-md-6">
                             <label for="expiry_date" class="form-label">Expiry Date</label>

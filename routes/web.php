@@ -53,6 +53,11 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/print-expired-list-6-month', [ProductController::class, 'printExpiredListSixMonth']);
     Route::get('/damage-product', [ProductController::class, 'damageProduct'])->name('damage.product.view');
     Route::get('/live-search-order', [ProductController::class, 'liveSearchOrder']);
+    Route::get('/product-setting', [ProductController::class, 'productSetting'])->name('product.setting.view');
+    Route::post('/add-category', [ProductController::class, 'addCategory']);
+    Route::post('/update-category', [ProductController::class, 'updateCategory']);
+    Route::post('/add-brand', [ProductController::class, 'addBrand']);
+    Route::post('/update-brand', [ProductController::class, 'updateBrand']);
 
     Route::get('/cart-view', [CartController::class, 'cartView']);
     Route::get('/add-to-cart', [CartController::class, 'addCart']);

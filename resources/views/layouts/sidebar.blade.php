@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center gap-2">
         <!-- Logo (uncomment if needed) -->
         <a href="{{ url('/') }}" class="logo-img d-inline-block">
-            <img src="assets/images/logos/main-icon.png" alt="Logo" width="36" height="36" class="img-fluid rounded" />
+             
         </a>       
         <h5 class="mb-0 fw-semibold text-primary">Dr.H.C Pharmacy</h5>
     </div>
@@ -41,7 +41,8 @@
                 </a>
                 <ul class="collapse list-unstyled ps-4 mt-1">
                     <li><a href="{{ url('/add-product-view') }}"><i class="far fa-dot-circle me-2"></i>Add New</a></li>
-                    <li><a href="{{ url('/edit-product-view') }}"><i class="far fa-dot-circle me-2"></i>Edit</a></li>
+                    <li><a href="{{ url('/product-setting') }}"><i class="far fa-dot-circle me-2"></i>Setting</a></li>
+                    <!-- <li><a href="{{ url('/edit-product-view') }}"><i class="far fa-dot-circle me-2"></i>Edit</a></li> -->
                 </ul>
             </li>
 

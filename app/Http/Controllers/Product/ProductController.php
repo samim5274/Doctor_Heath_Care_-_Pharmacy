@@ -14,20 +14,36 @@ use App\Models\Company;
 class ProductController extends Controller
 {
     public function productView(){
+        $company = Company::first();
         $brands = Brand::all();
         $category = Category::all();
         $product = Product::with('category','brand')->paginate(20);
-        return view('product.product-view', compact('product','brands','category'));
+        return view('product.product-view', compact('product','brands','category', 'company'));
     }
 
     public function editView(){
+        $company = Company::first();
         $brands = Brand::all();
         $category = Category::all();
         $product = Product::with('category','brand')->paginate(20);
-        return view('product.edit-product-list', compact('product','brands','category'));
+        return view('product.edit-product-list', compact('product','brands','category', 'company'));
     }
 
     public function addMedicine(Request $request){
+        // Validate inputs
+        $validated = $request->validate([
+            'name'             => 'required|string|max:255',
+            'generic_name'     => 'nullable|string|max:255',
+            'Brand'            => 'required|exists:brands,id',
+            'category'         => 'required|exists:categories,id',
+            'purchaseprice'    => 'required|numeric|min:0',
+            'price'            => 'required|numeric|min:0',
+            'stock'            => 'nullable|integer|min:0',
+            'manufacture_date' => 'nullable|date',
+            'expiry_date'      => 'nullable|date|after_or_equal:manufacture_date',
+            'description'      => 'nullable|string|max:500',
+        ]);
+
         $data = new Product();
         $data->name = $request->input('name','');
         $data->genericName = $request->input('generic_name','');
@@ -44,13 +60,14 @@ class ProductController extends Controller
     }
 
     public function editProduct($id){
+        $company = Company::first();
         $product = Product::where('id', $id)->first();
         if(empty($product)){
             return redirect()->back()->with('warning','Item not found. Try angain.');
         }
         $brands = Brand::all();
         $category = Category::all();
-        return view('product.edit-product-view', compact('product','brands','category'));
+        return view('product.edit-product-view', compact('product','brands','category', 'company'));
     }
 
     public function updateProduct(Request $request){
@@ -59,6 +76,20 @@ class ProductController extends Controller
         if(empty($product)){
             return redirect()->back()->with('warning','Item not found. Try angain.');
         }
+        // Validate inputs
+        $validated = $request->validate([
+            'name'             => 'required|string|max:255',
+            'generic_name'     => 'nullable|string|max:255',
+            'Brand'            => 'required|exists:brands,id',
+            'category'         => 'required|exists:categories,id',
+            'purchaseprice'    => 'required|numeric|min:0',
+            'price'            => 'required|numeric|min:0',
+            'stock'            => 'nullable|integer|min:0',
+            'manufacture_date' => 'nullable|date',
+            'expiry_date'      => 'nullable|date|after_or_equal:manufacture_date',
+            'description'      => 'nullable|string|max:500',
+        ]);
+        
         $product->name = $request->input('name','');
         $product->genericName = $request->input('generic_name','');
         $product->brand_id = $request->input('brand_id','');
@@ -73,42 +104,47 @@ class ProductController extends Controller
     }
 
     public function expritedList(){
+        $company = Company::first();
         $date = Carbon::today()->format('Ymd');
         $end = Carbon::today()->addDays(180)->format('Ymd');
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');
-        return view('product.expired-list', compact('product','total', 'stock'));
+        return view('product.expired-list', compact('product','total', 'stock', 'company'));
     }
 
     public function printExpiredList(){
+        $company = Company::first();
         $date = Carbon::now()->format('Ymd');
         $company = Company::all();
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');
-        return view('product.print-expired-list', compact('product','company','total', 'stock'));
+        return view('product.print-expired-list', compact('product','company','total', 'stock', 'company'));
     }
 
     public function ExpritedListSixMont(){
+        $company = Company::first();
         $date = Carbon::today()->addDays(180)->format('Ymd');
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');
-        return view('product.expired-list-6-month', compact('product','total', 'stock'));
+        return view('product.expired-list-6-month', compact('product','total', 'stock', 'company'));
     }
 
     public function printExpiredListSixMonth(){
+        $company = Company::first();
         $date = Carbon::today()->addDays(180)->format('Ymd');
         $company = Company::all();
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');
-        return view('product.print-expired-list-6-month', compact('product','company','total', 'stock'));
+        return view('product.print-expired-list-6-month', compact('product','company','total', 'stock', 'company'));
     }
 
     public function damageProduct(){
-        return view('product.damage-product');
+        $company = Company::first();
+        return view('product.damage-product', compact('company'));
     }
 
     public function liveSearchOrder(Request $request){
@@ -140,5 +176,68 @@ class ProductController extends Controller
             </tr>';
         }
         return response($output);
+    }
+
+    public function productSetting(){
+        $company = Company::first();
+        $brands = Brand::all();
+        $category = Category::all();
+        return view('product.product-setting', compact('company', 'brands', 'category'));
+    }
+
+    public function addCategory(Request $request){
+        $validated = $request->validate([
+            'txtCategory' => 'required|unique:categories,name',
+            'txtDiscription' => 'nullable|max:255',
+        ]);
+        $data = new Category();
+        $data->name = $request->input('txtCategory','');
+        $data->description = $request->input('txtDiscription','');
+        $data->save();
+        return redirect()->back()->with('success','New category addedd successfully.');
+    }
+
+    public function updateCategory(Request $request){
+        $validated = $request->validate([
+            'txtCategory' => 'required|name',
+            'txtDiscription' => 'nullable|max:255',
+        ]);
+        $id = $request->input('txtId', '');
+        $category = Category::where('id', $id)->first();
+        if(empty($category)){
+            return redirect()->back()->with('warning','Category not found. Try angain.');
+        }
+        $category->name = $request->input('txtCategory','');
+        $category->description = $request->input('txtDiscription','');
+        $category->update();
+        return redirect()->back()->with('success','Category details updated successfully.');
+    }
+
+    public function addBrand(Request $request){
+        $validated = $request->validate([
+            'txtBrand' => 'required|unique:brands,name',
+            'txtDiscription' => 'nullable|max:255',
+        ]);
+        $data = new Brand();
+        $data->name = $request->input('txtBrand','');
+        $data->description = $request->input('txtDiscription','');
+        $data->save();
+        return redirect()->back()->with('success','New brand addedd successfully.');
+    }
+
+    public function updateBrand(Request $request){
+        $validated = $request->validate([
+            'txtBrand' => 'required',
+            'txtDiscription' => 'nullable|max:255',
+        ]);
+        $id = $request->input('txtId', '');
+        $brand = Brand::where('id', $id)->first();
+        if(empty($brand)){
+            return redirect()->back()->with('warning','Brand not found. Try angain.');
+        }
+        $brand->name = $request->input('txtBrand','');
+        $brand->description = $request->input('txtDiscription','');
+        $brand->update();
+        return redirect()->back()->with('success','Brand details updated successfully.');
     }
 }
