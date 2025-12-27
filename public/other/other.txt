@@ -1,0 +1,1 @@
+INSERT INTO `companies` (`id`, `name`, `address`, `email`, `phone`, `website`, `created_at`, `updated_at`) VALUES (NULL, 'Doctors Health care & pharmacy', 'Baniachal,khalpar,Narsingdi sadar,Narsingdi.', 'dhcpharmacy022@gmail.com', '01700000000', 'www.dhcpharmacy.shop', '2025-12-27 11:27:16', '2025-12-27 11:27:16');
