@@ -20,6 +20,11 @@ class BrandSeeder extends Seeder
             ['name' => 'Opsonin', 'description' => 'Opsonin Pharma Ltd.'],
         ];
 
-        Brand::insert($brands);
+        foreach ($brands as $brand) {
+            Brand::updateOrCreate(
+                ['name' => $brand['name']], // unique column
+                ['description' => $brand['description']]
+            );
+        }
     }
 }

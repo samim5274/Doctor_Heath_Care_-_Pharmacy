@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $company = Company::first();
             $view->with([
                 'user' => $user,
-                'company', $company,
+                'company' => $company,
             ]);
         });
     }

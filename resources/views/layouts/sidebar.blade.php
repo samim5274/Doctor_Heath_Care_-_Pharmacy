@@ -5,7 +5,7 @@
         <a href="{{ url('/') }}" class="logo-img d-inline-block">
             <img src="assets/images/logos/main-icon.png" alt="Logo" width="36" height="36" class="img-fluid rounded" />
         </a>       
-        <h5 class="mb-0 fw-semibold text-primary">Pharmacy Shop MIS</h5>
+        <h5 class="mb-0 fw-semibold text-primary">Dr.H.C Pharmacy</h5>
     </div>
     <button type="button" class="btn btn-sm btn-outline-secondary close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="fas fa-times"></i>
