@@ -29,7 +29,7 @@ class StockController extends Controller
     }
 
     public function printStock(){
-        $company = Company::all();
+        $company = Company::first();
         $data = Product::all();
         $stock = Product::sum('stock');
         $purchasePrice = Product::sum('purchase_price');
@@ -50,7 +50,7 @@ class StockController extends Controller
         $request->validate([
             'cbxCategory' => 'required',
         ]);
-        $company = Company::all();
+        $company = Company::first();
         $category = $request->input('cbxCategory','');
         $data = Product::where('category_id', $category)->paginate(15);
         $stock = Product::where('category_id', $category)->sum('stock');
@@ -76,7 +76,7 @@ class StockController extends Controller
         $request->validate([
             'cbxCategory' => 'required',
         ]);
-        $company = Company::all();
+        $company = Company::first();
         $brand = $request->input('cbxCategory','');
         $data = Product::where('brand_id', $brand)->paginate(15);
         $stock = Product::where('brand_id', $brand)->sum('stock');
@@ -102,7 +102,7 @@ class StockController extends Controller
         $request->validate([
             'cbxProduct' => 'required',
         ]);
-        $company = Company::all();
+        $company = Company::first();
         $product = Product::all();
         $id = $request->input('cbxProduct','');
         $stock = Stock::where('medicine_id', $id)->with('product')->paginate(15);

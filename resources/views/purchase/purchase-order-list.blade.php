@@ -35,12 +35,6 @@
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Reg</th>
-                                    <th>Total (৳)</th>
-                                    <th>Discount (৳)</th>
-                                    <th>VAT % (৳)</th>
-                                    <th>Payable (৳)</th>
-                                    <th>Pay (৳)</th>
-                                    <th>Due (৳)</th>
                                     <th class="text-center">Status</th>
                                 </tr>
                             </thead>
@@ -48,15 +42,11 @@
                                 @foreach($order as $key => $val)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{$val->order_date}}</td>
+                                    <td>
+                                        {{ $val->order_date ? \Carbon\Carbon::parse($val->order_date)->format('d F Y') : '-' }}
+                                    </td>
                                     <td>{{$val->supplier->name}}</td>
-                                    <td>CHL-<a href="{{ url('/view-purchase-order/'.$val->chalan_reg) }}">{{$val->chalan_reg}}</a></td>
-                                    <td>৳{{$val->total}}/-</td>
-                                    <td>৳{{$val->discount}}/-</td>
-                                    <td>৳{{$val->vat}}/-</td>
-                                    <td>৳{{$val->payable}}/-</td>
-                                    <td>৳{{$val->pay}}/-</td>
-                                    <td>৳{{$val->due}}/-</td>
+                                    <td>INV-<a href="{{ url('/view-purchase-order/'.$val->chalan_reg) }}">{{$val->chalan_reg}}</a></td>
                                     <td class="text-center">
                                         <div class="d-flex flex-column align-items-center gap-1">
 
@@ -96,16 +86,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                <tr class="table-info">
-                                    <td colspan="4">Total:</td>
-                                    <td>৳{{$total}}/-</td>
-                                    <td>৳{{$discount}}/-</td>
-                                    <td>৳{{$vat}}/-</td>
-                                    <td>৳{{$payable}}/-</td>
-                                    <td>৳{{$pay}}/-</td>
-                                    <td>৳{{$due}}/-</td>
-                                    <td></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

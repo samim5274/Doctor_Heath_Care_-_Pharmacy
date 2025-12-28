@@ -19,10 +19,18 @@ class Order extends Model
         'payable',
         'pay',
         'due',
-        'status'
+        'status',
+        'paymentMethod',
+        'customerName',
+        'customerPhone',
     ];
 
     public function user(){
         return $this->belongsTo(Admin::class, 'user_id', 'id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'paymentMethod', 'id');
     }
 }

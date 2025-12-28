@@ -26,7 +26,7 @@ class ExpensesReportController extends Controller
         $date = Carbon::now()->format('Ymd');
         $data = Expenses::where('date', $date)->paginate(20);
         $total = Expenses::where('date', $date)->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         return view('expenses.print.print-total-expenses-report-today', compact('data', 'total','company'));
     }
 
@@ -36,7 +36,7 @@ class ExpensesReportController extends Controller
 
         $data = Expenses::whereBetween('date', [$start, $end])->paginate(20);
         $total = Expenses::whereBetween('date', [$start, $end])->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('expenses.print.print-total-expenses-report', compact('data', 'total','company','start','end'));
         }
@@ -61,7 +61,7 @@ class ExpensesReportController extends Controller
         $catId = $request->input('cbxCategory','');
         $data = Expenses::whereBetween('date', [$start, $end])->where('catId', $catId)->paginate(20);
         $total = Expenses::whereBetween('date', [$start, $end])->where('catId', $catId)->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('expenses.print.print-category-expenses-report', compact('data', 'total','company','start','end'));
         }
@@ -88,7 +88,7 @@ class ExpensesReportController extends Controller
         $category = Excategory::all();
         $data = Expenses::whereBetween('date', [$start, $end])->where('catId', $catId)->where('subcatId', $subCatId)->paginate(20);
         $total = Expenses::whereBetween('date', [$start, $end])->where('catId', $catId)->where('subcatId', $subCatId)->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('expenses.print.print-sub-category-expenses-report', compact('data', 'total','category','company','start','end'));
         }
@@ -113,7 +113,7 @@ class ExpensesReportController extends Controller
         $user = Admin::all();
         $data = Expenses::whereBetween('date', [$start, $end])->where('userId', $userId)->paginate(20);
         $total = Expenses::whereBetween('date', [$start, $end])->where('userId', $userId)->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('expenses.print.print-user-expenses-report', compact('data', 'total','user','company','start','end'));
         }

@@ -88,9 +88,9 @@
 </head>
 <body>
 
-    <h1>{{ $company[0]->name }}</h1>
-    <p>{{ $company[0]->address }}</p>
-    <p>Mobile: {{ $company[0]->phone }} | Website: {{ $company[0]->website }}</p>
+    <h1>{{ $company->name }}</h1>
+    <p>{{ $company->address }}</p>
+    <p>Mobile: {{ $company->phone }} | Website: {{ $company->website }}</p>
 
     <h3>Sale Profit Report</h3>
     <h5>Start: {{ $start }} &nbsp;&nbsp; End: {{ $end }}</h5>
@@ -144,8 +144,7 @@
     </div>
 
     <p class="footer-note">
-        <strong>Note:</strong> This software is developed by <strong>BGMIT</strong>, created by <strong>SAMIM-HosseN</strong>.
-        Call: +8801 62420 9291. Thank You!
+        <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
     </p>
 
     <script>

@@ -30,7 +30,7 @@ class OrderController extends Controller
     public function printOrder(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         $order = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->orderBy('id', 'desc')->get();
         $total = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->sum('total');
         $discount = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->sum('discount');

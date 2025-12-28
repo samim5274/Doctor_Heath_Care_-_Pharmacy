@@ -42,7 +42,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-total-purchase-report', compact('purchase','company','total','discount','vat','payable','pay','due'));
         }
@@ -52,7 +52,7 @@ class PurchaseReportController extends Controller
     public function printPurchaseReport(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         $purchase = Purchaseorder::whereBetween('order_date', [$start, $end])->get();
         $total = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('total');
         $discount = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('discount');
@@ -80,7 +80,7 @@ class PurchaseReportController extends Controller
     public function printPurchaseDeliveryReport(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         // ['1 = order', '2 = delivery', '3 = cancelled', '4 = bill payment', '5 = purchase return]
         $purchase = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 2)->paginate(20); 
         $total = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 2)->sum('total');
@@ -103,7 +103,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 2)->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 2)->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 2)->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-delivery-total-purchase-report', compact('purchase','company','total','discount','vat','payable','pay','due'));
         }
@@ -127,7 +127,7 @@ class PurchaseReportController extends Controller
     public function printPaymentCompleteReport(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         // ['1 = order', '2 = delivery', '3 = cancelled', '4 = bill payment', '5 = purchase return]
         $purchase = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 4)->paginate(20); 
         $total = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 4)->sum('total');
@@ -150,7 +150,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 4)->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 4)->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 4)->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-payment-total-purchase-report', compact('purchase','company','total','discount','vat','payable','pay','due'));
         }
@@ -174,7 +174,7 @@ class PurchaseReportController extends Controller
     public function printCancelPurchaseReport(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         // ['1 = order', '2 = delivery', '3 = cancelled', '4 = bill payment', '5 = purchase return]
         $purchase = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 3)->paginate(20); 
         $total = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 3)->sum('total');
@@ -197,7 +197,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 3)->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 3)->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 3)->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-cancel-total-purchase-report', compact('purchase','company','total','discount','vat','payable','pay','due'));
         }
@@ -221,7 +221,7 @@ class PurchaseReportController extends Controller
     public function printReturnPurchaseReport(){
         $start = Carbon::now()->format('Ymd');
         $end = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         // ['1 = order', '2 = delivery', '3 = cancelled', '4 = bill payment', '5 = purchase return]
         $purchase = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 5)->paginate(20); 
         $total = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 5)->sum('total');
@@ -244,7 +244,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 5)->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 5)->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->where('status', 5)->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-return-total-purchase-report', compact('purchase','company','total','discount','vat','payable','pay','due'));
         }
@@ -277,7 +277,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print.print-supplier-total-purchase-report', compact('purchase','total','discount','vat','payable','pay','due','company'));
     }
 
@@ -296,7 +296,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::where('supplier_id', $supply_id)->whereBetween('order_date', [$start, $end])->sum('payable');
         $pay = Purchaseorder::where('supplier_id', $supply_id)->whereBetween('order_date', [$start, $end])->sum('pay');
         $due = Purchaseorder::where('supplier_id', $supply_id)->whereBetween('order_date', [$start, $end])->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-supplier-total-purchase-report', compact('purchase','total','discount','vat','payable','pay','due','company'));
         }
@@ -327,7 +327,7 @@ class PurchaseReportController extends Controller
         $payable = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('payable');
         $pay = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('pay');
         $due = Purchaseorder::whereBetween('order_date', [$start, $end])->sum('due');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print.print-user-total-purchase-report', compact('purchase','total','discount','vat','payable','pay','due','company'));
     }
 
@@ -346,7 +346,7 @@ class PurchaseReportController extends Controller
         $pay = Purchaseorder::where('user_id', $user)->whereBetween('order_date', [$start, $end])->sum('pay');
         $due = Purchaseorder::where('user_id', $user)->whereBetween('order_date', [$start, $end])->sum('due');
         $user = Admin::all();
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('purchase.print.print-user-total-purchase-report', compact('purchase','total','discount','vat','payable','pay','due','company'));
         }

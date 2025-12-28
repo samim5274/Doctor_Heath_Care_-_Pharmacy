@@ -12,6 +12,7 @@ use Auth;
 use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Company;
+use App\Models\PaymentMethod;
 
 class CartController extends Controller
 {
@@ -24,9 +25,10 @@ class CartController extends Controller
     public function cartView(){
         $reg = $this->genRegNum();
         $company = Company::first();
+        $payMathod = PaymentMethod::all();
         $cart = Cart::where('reg', $reg)->with('medicine')->get();
         $count = Cart::where('reg', $reg)->count();
-        return view('cart.cart', compact('cart','count', 'reg', 'company'));
+        return view('cart.cart', compact('cart','count', 'reg', 'company', 'payMathod'));
     }
 
     public function addCart(Request $request){

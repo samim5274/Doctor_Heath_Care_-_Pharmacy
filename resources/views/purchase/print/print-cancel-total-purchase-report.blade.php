@@ -85,14 +85,10 @@
 </head>
 <body>
     <div class="header">
-        <h1 style="text-align:center;">{{$company[0]->name}}</h1>
-        <p style="text-align:center;">{{$company[0]->address}}</p>
-        <p style="text-align:center;">Mobaile: {{$company[0]->phone}}  website: {{$company[0]->website}}</p>
+        <h1 style="text-align:center;">{{$company->name}}</h1>
+        <p style="text-align:center;">{{$company->address}}</p>
+        <p style="text-align:center;">Mobaile: {{$company->phone}}  website: {{$company->website}}</p>
         <h4>Purchase Cancel Report</h4>
-    </div>
-
-    <div class="sub-header">
-        <p><strong>QR:</strong> QR-PENDING</p>
     </div>
 
     <table>
@@ -159,7 +155,7 @@
     </div>
 
     <div class="note">
-        <p><strong>Note:</strong> This software is developed by <strong>BGMIT</strong>, created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
+        <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
     </div>
 
     <script>

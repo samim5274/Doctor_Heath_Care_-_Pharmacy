@@ -143,6 +143,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group row mb-3">
+                                        <label for="paymentMethods" class="col-sm-3 col-form-label">Payment:</label>
+                                        <div class="col-sm-9">
+                                            <select name="paymentMethods" id="paymentMethods" class="col-sm-3 form-control">
+                                                <option disabled>-- Select Payment Method --</option>
+                                                @foreach($payMathod as $val)
+                                                <option value="{{$val->id}}">{{ $val->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <!-- Pay Input -->
                                     <div class="mb-3 row">
                                         <label for="num2" class="col-sm-3 col-form-label">Pay</label>
@@ -152,6 +164,14 @@
                                     </div>
 
                                     <hr>
+
+                                    <div id="customer-info">
+                                        <!-- <label for="customerName">Customer Name:</label> -->
+                                        <input type="text" name="txtCustomerName" id="customerName" placeholder="Enter Name" class="form-control mb-2">
+
+                                        <!-- <label for="customerPhone">Customer Phone:</label> -->
+                                        <input type="text" name="txtCustomerPhone" id="customerPhone" placeholder="Enter Phone" class="form-control">
+                                    </div>
 
                                     <div class="text-end mb-3">
                                         <p id="result" class="display-6 text-danger">Amount: 00/-</p>
@@ -169,6 +189,7 @@
                 </div>
             </div>
         </div>
+        @include('layouts.footer')
     </div>
 </div>
 

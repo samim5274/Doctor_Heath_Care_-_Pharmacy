@@ -57,9 +57,9 @@
     </div><hr>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
         <p style="margin: 0;">Officer: {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : 'N/A' }}</p>
-        <div class="qrImg">
+        <!-- <div class="qrImg">
             QR-
-        </div>
+        </div> -->
     </div>
 
     <table class="invoice-table">
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    <p class="small"><strong>Note:</strong> This Software develop by <strong>BGMIT</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
+    <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
 
      <script>
         window.onload = function() {

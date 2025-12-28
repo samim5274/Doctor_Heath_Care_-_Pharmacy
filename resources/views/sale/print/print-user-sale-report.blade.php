@@ -28,9 +28,9 @@
 <body>
 
     <div class="invoice-box">
-        <h1 style="text-align:center;">{{$company[0]->name}}</h1>
-        <p style="text-align:center;">{{$company[0]->address}}</p>
-        <p style="text-align:center;">Mobaile: {{$company[0]->phone}}  website: {{$company[0]->website}}</p>
+        <h1 style="text-align:center;">{{$company->name}}</h1>
+        <p style="text-align:center;">{{$company->address}}</p>
+        <p style="text-align:center;">Mobaile: {{$company->phone}}  website: {{$company->website}}</p>
         <h3 style="text-align:center;">Date wise Sale Report</h3>
         <p style="text-align:center;">Start: {{$start}} & End: {{$end}}</p>
         <hr>
@@ -98,7 +98,7 @@
     </div>
 
     <br>
-    <p class="small"><strong>Note:</strong> This Software develop by <strong>BGMIT</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
+    <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
 
      <script>
         window.onload = function() {

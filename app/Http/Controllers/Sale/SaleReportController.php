@@ -34,7 +34,7 @@ class SaleReportController extends Controller
         $start = $request->input('dtpStartDate','');
         $end = $request->input('dtpEndDate','');
 
-        $company = Company::all();
+        $company = Company::first();
         $order = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->paginate(20);
         $total = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->sum('total');
         $discount = Order::whereBetween('date', [$start, $end])->where('status', '!=', 1)->sum('discount');
@@ -90,7 +90,7 @@ class SaleReportController extends Controller
         $grand_total_qty = $cart->sum('total_quantity');
         $grand_total_price = $cart->sum('total_price');
 
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('sale.print.product-and-day-wise-sale-print', compact('cart','company','grand_total_qty','grand_total_price','start','end'));
         }
@@ -131,7 +131,7 @@ class SaleReportController extends Controller
         $grand_total_qty = $cart->sum('total_quantity');
         $grand_total_price = $cart->sum('total_price');
         
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('sale.print.day-wise-product-sale-report-print', compact('cart','company','grand_total_qty','grand_total_price','start','end'));
         }
@@ -161,7 +161,7 @@ class SaleReportController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->where('status', '=', 1)->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->where('status', '=', 1)->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->where('status', '=', 1)->sum('vat');
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('sale.print.current-day-wise-sale-return-report-print', compact('order','company','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end'));
         }
@@ -239,7 +239,7 @@ class SaleReportController extends Controller
                 $medicines = Product::whereIn('id', $medicineIds)->get();
             }           
         }
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('sale.print.print-sale-profit-report', compact('order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','result','medicines','start','end', 'company'));
         }
@@ -300,7 +300,7 @@ class SaleReportController extends Controller
         $due = Order::whereBetween('date', [$start, $end])->where('user_id', $user)->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->where('user_id', $user)->sum('vat');
         $user = Admin::all();
-        $company = Company::all();
+        $company = Company::first();
         if($request->has('print')){
             return view('sale.print.print-user-sale-report', compact('order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','user','start','end', 'company'));
         }

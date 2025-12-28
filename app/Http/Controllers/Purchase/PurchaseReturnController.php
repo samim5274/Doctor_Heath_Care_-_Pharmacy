@@ -153,8 +153,9 @@ class PurchaseReturnController extends Controller
     }
 
     public function printReturn($reg){
+        $company = Company::first();
         $returnOrder = Purchasereturnorder::where('chalan_reg', $reg)->first();
         $returnCart = Purchasereturn::where('chalan_reg', $reg)->get();
-        return view('purchase.return.print-purchase-return', compact('returnOrder','returnCart'));
+        return view('purchase.return.print-purchase-return', compact('returnOrder','returnCart','company'));
     }
 }

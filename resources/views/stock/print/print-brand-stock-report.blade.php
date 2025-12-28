@@ -109,10 +109,10 @@
 
     <div class="invoice-box">
         <div class="text-center">
-            <h1>{{ $company[0]->name }}</h1>
+            <h1>{{ $company->name }}</h1>
             <div class="company-info">
-                <p>{{ $company[0]->address }}</p>
-                <p>Mobile: {{ $company[0]->phone }} &nbsp; | &nbsp; Website: {{ $company[0]->website }}</p>
+                <p>{{ $company->address }}</p>
+                <p>Mobile: {{ $company->phone }} &nbsp; | &nbsp; Website: {{ $company->website }}</p>
                 <h3>Brand wise total stock</h3>
                 <p>{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
             </div>
@@ -173,8 +173,8 @@
         </div>
     </div>
 
-    <p class="note"><strong>Note:</strong> This software developed by <strong>BGMIT</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
-
+    <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
+    
     <script>
         window.onload = function() {
             window.print();

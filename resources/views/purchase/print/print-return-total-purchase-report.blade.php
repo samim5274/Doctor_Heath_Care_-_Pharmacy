@@ -91,10 +91,6 @@
         <h4>Purchase Return Report</h4>
     </div>
 
-    <div class="sub-header">
-        <p><strong>QR:</strong> QR-PENDING</p>
-    </div>
-
     <table>
         <thead>
             <tr>
@@ -159,7 +155,7 @@
     </div>
 
     <div class="note">
-        <p><strong>Note:</strong> This software is developed by <strong>BGMIT</strong>, created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
+        <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
     </div>
 
     <script>

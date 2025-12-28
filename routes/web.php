@@ -28,7 +28,8 @@ Route::post('/create-new-account', [LoginController::class, 'createNewAccount'])
 Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/', function () {
-        return view('welcome');
+        $company = DB::table('companys')->first();
+        return view('welcome', compact('company'));
     })->name('dashboard');
 
     Route::get('/', [HomeController::class, 'index'])->name('home');

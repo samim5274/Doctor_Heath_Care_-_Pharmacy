@@ -108,8 +108,7 @@
             <div class="company-info">
                 <p>{{ $company->address }}</p>
                 <p>Mobile: {{ $company->phone }} &nbsp; | &nbsp; Website: {{ $company->website }}</p>
-                <h3>Total Expenses</h3>
-                <p>{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
+                <p>Print Date: {{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
             </div>
         </div>
 
@@ -126,7 +125,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($data as $val)
+                @foreach($expenses as $val)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $val->date }}</td>
@@ -153,6 +152,7 @@
     </div>
 
     <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
+
     <script>
         window.onload = function() {
             window.print();

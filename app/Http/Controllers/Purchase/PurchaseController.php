@@ -172,24 +172,19 @@ class PurchaseController extends Controller
     public function printPurchaseOrder($reg){
         $order = Purchaseorder::where('chalan_reg', $reg)->orderBy('id', 'desc')->firstOrFail();        
         $cart = Purchasecart::where('chalan_reg', $reg)->get();
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.printPurchaseOrder', compact('order','company','cart'));
     }
 
     public function purchaseOrderlist(){
         $order = Purchaseorder::where('status', 1)->with('user')->paginate(20);
-        $total = Purchaseorder::where('status', 1)->sum('total');
-        $discount = Purchaseorder::where('status', 1)->sum('discount');
-        $payable = Purchaseorder::where('status', 1)->sum('payable');
-        $pay = Purchaseorder::where('status', 1)->sum('pay');
-        $due = Purchaseorder::where('status', 1)->sum('due');
-        $vat = Purchaseorder::where('status', 1)->sum('vat');
-        return view('purchase.purchase-order-list', compact('order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        $company = Company::first();
+        return view('purchase.purchase-order-list', compact('order','company'));
     }
 
     public function printPurchaseOrderList(){
         $order = Purchaseorder::where('status', 1)->with('user')->paginate(20);
-        $company = Company::all();
+        $company = Company::first();
         $total = Purchaseorder::where('status', 1)->sum('total');
         $discount = Purchaseorder::where('status', 1)->sum('discount');
         $payable = Purchaseorder::where('status', 1)->sum('payable');
@@ -202,7 +197,7 @@ class PurchaseController extends Controller
     public function printPurchaseOrderSpecific($reg){
         $cart = Purchasecart::where('chalan_reg', $reg)->with('medicine','user')->get();
         $order = Purchaseorder::where('chalan_reg', $reg)->with('user')->first();
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.printPurchaseOrderSpecific', compact('order','company','cart'));
     }
 
@@ -280,7 +275,7 @@ class PurchaseController extends Controller
 
     public function printCompletePurchaseOrder(){
         $order = Purchaseorder::where('status', 2)->paginate(20);
-        $company = Company::all();
+        $company = Company::first();
         $total = Purchaseorder::where('status', 2)->sum('total');
         $discount = Purchaseorder::where('status', 2)->sum('discount');
         $payable = Purchaseorder::where('status', 2)->sum('payable');
@@ -379,7 +374,7 @@ class PurchaseController extends Controller
         $pay = Purchaseorder::where('status', 4)->where('order_date', $date)->sum('pay');
         $due = Purchaseorder::where('status', 4)->where('order_date', $date)->sum('due');
         $vat = Purchaseorder::where('status', 4)->where('order_date', $date)->sum('vat');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print.print-payment-list', compact('order','company','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
@@ -414,7 +409,7 @@ class PurchaseController extends Controller
         $pay = Purchaseorder::where('chalan_reg', $reg)->sum('pay');
         $due = Purchaseorder::where('chalan_reg', $reg)->sum('due');
         $vat = Purchaseorder::where('chalan_reg', $reg)->sum('vat');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print-order-payment', compact('cart','company','order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
@@ -437,7 +432,7 @@ class PurchaseController extends Controller
         $pay = Purchaseorder::where('status',3)->sum('pay');
         $due = Purchaseorder::where('status',3)->sum('due');
         $vat = Purchaseorder::where('status',3)->sum('vat');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print.print-cancel-order-list', compact('order','company','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
@@ -504,7 +499,7 @@ class PurchaseController extends Controller
         $pay = Purchaseorder::where('due','!=', 0)->sum('pay');
         $due = Purchaseorder::where('due','!=', 0)->sum('due');
         $vat = Purchaseorder::where('due','!=', 0)->sum('vat');
-        $company = Company::all();
+        $company = Company::first();
         return view('purchase.print.print-purchase-due-list', compact('order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
     }
 }

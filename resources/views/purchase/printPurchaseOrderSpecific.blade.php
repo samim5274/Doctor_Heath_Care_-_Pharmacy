@@ -41,18 +41,15 @@
 <body>
 
     <div class="invoice-header">
-        <h1 style="text-align:center;">{{$company[0]->name}}</h1>
-        <p style="text-align:center;">{{$company[0]->address}}</p>
-        <p style="text-align:center;">Mobaile: {{$company[0]->phone}}  website: {{$company[0]->website}}</p>
+        <h1 style="text-align:center;">{{$company->name}}</h1>
+        <p style="text-align:center;">{{$company->address}}</p>
+        <p style="text-align:center;">Mobaile: {{$company->phone}}  website: {{$company->website}}</p>
         <h4>Order Invoice</h4>
         <h5>Date: {{$order->order_date}}</h5>
     </div><hr>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
         <p style="margin: 0;">Billing office: {{$cart[0]->user->name}}</p>
         <p style="margin: 0;">Supplier: {{$order->supplier->name}}</p>
-        <div class="qrImg">
-            QR-
-        </div>
     </div>
 
     <table class="invoice-table">
@@ -124,7 +121,7 @@
         </div>
     </div>
 
-    <p class="small"><strong>Note:</strong> This Software develop by <strong>BGMIT</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 62420 9291. Thank You!</p>
+    <p class="note">This software developed by <strong>ARS Soft</strong> created by <strong>SAMIM-HosseN</strong>. Call: +8801 5330 21557. Thank You!</p>
 
      <script>
         window.onload = function() {

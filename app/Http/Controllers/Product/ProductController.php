@@ -116,7 +116,7 @@ class ProductController extends Controller
     public function printExpiredList(){
         $company = Company::first();
         $date = Carbon::now()->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');
@@ -135,7 +135,7 @@ class ProductController extends Controller
     public function printExpiredListSixMonth(){
         $company = Company::first();
         $date = Carbon::today()->addDays(180)->format('Ymd');
-        $company = Company::all();
+        $company = Company::first();
         $product = Product::where('expiry_date', '<=', $date)->paginate(20);
         $total = Product::where('expiry_date', '<=', $date)->sum('price');
         $stock = Product::where('expiry_date', '<=', $date)->sum('stock');

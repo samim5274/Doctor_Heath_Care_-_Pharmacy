@@ -16,13 +16,16 @@ return new class extends Migration
             $table->date('date');
             $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
             $table->unsignedBigInteger('reg')->unique();
-            $table->unsignedBigInteger('total')->nullable();
-            $table->unsignedBigInteger('discount')->nullable();
-            $table->unsignedBigInteger('vat')->nullable();
-            $table->unsignedBigInteger('payable')->nullable();
-            $table->unsignedBigInteger('pay')->nullable();
-            $table->bigInteger('due')->nullable();
+            $table->decimal('total', 12, 2)->nullable();
+            $table->decimal('discount', 12, 2)->nullable();
+            $table->decimal('vat', 12, 2)->nullable();
+            $table->decimal('payable', 12, 2)->nullable();
+            $table->decimal('pay', 12, 2)->nullable();
+            $table->decimal('due', 12, 2)->nullable();
             $table->Integer('status')->default(0);
+            $table->foreignId('paymentMethod')->constrained('payment_methods')->onDelete('restrict');
+            $table->string('customerName')->default(0);
+            $table->Integer('customerPhone')->default(0);
             $table->timestamps();
         });
     }

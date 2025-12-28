@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center gap-2">
         <!-- Logo (uncomment if needed) -->
         <a href="{{ url('/') }}" class="logo-img d-inline-block">
-             
+            <img src="assets/images/logos/dhcpharmacy.png" alt="Logo" width="36" height="36" class="img-fluid rounded" />
         </a>       
         <h5 class="mb-0 fw-semibold text-primary">Dr.H.C Pharmacy</h5>
     </div>

@@ -110,7 +110,7 @@ class ExpensesController extends Controller
     public function printExpensesSpecific($id){
         $date = Carbon::now()->format('Ymd');
         $expenses = Expenses::where('id', $id)->get();
-        $company = Company::all();
+        $company = Company::first();
         return view('expenses.print.specific-expenses-print', compact('expenses','company'));
     }
 
@@ -118,7 +118,7 @@ class ExpensesController extends Controller
         $date = Carbon::now()->format('Ymd');
         $expenses = Expenses::where('date', $date)->get();
         $total = Expenses::where('date', $date)->sum('amount');
-        $company = Company::all();
+        $company = Company::first();
         return view('expenses.print.daily-expenses-print', compact('expenses','company','total'));
     }
 

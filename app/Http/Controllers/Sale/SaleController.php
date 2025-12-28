@@ -46,6 +46,7 @@ class SaleController extends Controller
             $total = $request->input('txtSubTotal', 0);
             $discount = $request->input('txtDiscount', 0);
             $vat = $request->input('txtVAT', 0);
+            $payMethod = $request->input('paymentMethods', 0);
 
             $newVat = $total * $vat / 100;
             $payable = ($total - $discount) + $newVat;
@@ -62,6 +63,7 @@ class SaleController extends Controller
             $order->discount = $discount;
             $order->vat = $newVat;
             $order->payable = $payable;
+            $order->paymentMethod = $payMethod;
 
 
             if($received >= $payable) {
@@ -70,6 +72,13 @@ class SaleController extends Controller
             } else {
                 $order->pay = $received;
                 $order->due = $dueAmount;
+
+                $request->validate([
+                    'txtCustomerName' => 'required',
+                    'txtCustomerPhone' => 'required',
+                ]);
+                $order->customerName = $request->input('txtCustomerName', '');
+                $order->customerPhone = $request->input('txtCustomerPhone', '');
             }
             
             // Auto status set // 1 order confrim and 2 bill paid, 3 due
@@ -89,8 +98,8 @@ class SaleController extends Controller
     public function printOrder($reg){
         $order = Order::where('reg', $reg)->orderBy('id', 'desc')->firstOrFail();        
         $cart = Cart::where('reg', $reg)->get();
-        $company = Company::all();
-        return view('print.print', compact('order','cart','company'));
+        $company = Company::first();
+        return view('print.print-80m', compact('order','cart','company'));
     }
 
     public function dueCollection(Request $request, $reg){
