@@ -15,11 +15,12 @@ use App\Models\Company;
 class ExpensesController extends Controller
 {
     public function expenses(){
+        $company = Company::first();
         $date = Carbon::now()->format('Ymd');
         $expenses = Expenses::where('date', $date)->paginate(20);
         $category = Excategory::all();
         $total = Expenses::where('date', $date)->sum('amount');
-        return view('expenses.expenses', compact('expenses','total','category'));
+        return view('expenses.expenses', compact('expenses','total','category','company'));
     }
 
     public function getSubCategory($id){
@@ -46,10 +47,11 @@ class ExpensesController extends Controller
     }
 
     public function exSetting(){
+        $company = Company::first();
         $cat = Excategory::paginate(5);
         $subCat = Subexcategory::paginate(5);
         $category = Excategory::all();
-        return view('expenses.expenses-setting', compact('cat','category','subCat'));
+        return view('expenses.expenses-setting', compact('cat','category','subCat','company'));
     }
 
     public function addExCategory(Request $request){
@@ -82,11 +84,12 @@ class ExpensesController extends Controller
     }
 
     public function editExpenses($id){
+        $company = Company::first();
         $expenses = Expenses::where('id', $id)->first();
         $category = Excategory::all();
         $subcategory = Subexcategory::all();
         // dd($expenses);
-        return view('expenses.edit-expenses', compact('expenses','category','subcategory'));
+        return view('expenses.edit-expenses', compact('expenses','category','subcategory','company'));
     }
 
     public function updateExpenses(Request $request, $id){
