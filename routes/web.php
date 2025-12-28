@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Expenses\ExpensesReportController;
 use App\Http\Controllers\Stock\StockController;
+use App\Http\Controllers\Damage\DamageController;
 
 Auth::routes();
 
@@ -52,13 +53,19 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/print-expired-list', [ProductController::class, 'printExpiredList']);
     Route::get('/expired-list-6-month', [ProductController::class, 'ExpritedListSixMont'])->name('expired.list.180.days.view');
     Route::get('/print-expired-list-6-month', [ProductController::class, 'printExpiredListSixMonth']);
-    Route::get('/damage-product', [ProductController::class, 'damageProduct'])->name('damage.product.view');
     Route::get('/live-search-order', [ProductController::class, 'liveSearchOrder']);
     Route::get('/product-setting', [ProductController::class, 'productSetting'])->name('product.setting.view');
     Route::post('/add-category', [ProductController::class, 'addCategory']);
     Route::post('/update-category', [ProductController::class, 'updateCategory']);
     Route::post('/add-brand', [ProductController::class, 'addBrand']);
     Route::post('/update-brand', [ProductController::class, 'updateBrand']);
+
+    Route::get('/damage-product', [DamageController::class, 'index'])->name('damage.product.view');
+    Route::post('/damage-product-insert', [DamageController::class, 'storeDamageProduct']);
+    Route::get('/edit-damage-product/{id}', [DamageController::class, 'editDamageProduct'])->name('edit.damage.product.view');
+    Route::post('/damage-product-update/{id}', [DamageController::class, 'updateDamageProduct']);
+    Route::get('/delete-damage-product/{id}', [DamageController::class, 'damageProductList'])->name('damage.product.list');
+    Route::get('/print-damage-product-list', [DamageController::class, 'printDamageProductList']);
 
     Route::get('/cart-view', [CartController::class, 'cartView']);
     Route::get('/add-to-cart', [CartController::class, 'addCart']);
@@ -82,6 +89,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/sale-profit-report-by-specified-order', [SaleReportController::class, 'specificSaleProfitReport'])->name('every.order.profit.report.view');
     Route::get('/user-sale-report', [SaleReportController::class, 'userSaleReport'])->name('user.wise.sale.report');
     Route::get('/filter-user-wise-sale-report', [SaleReportController::class, 'filterUserSaleReport']);
+    Route::get('/top-sale-product', [SaleReportController::class, 'topSaleProduct'])->name('top.50.sale.product.view');
 
     Route::get('/order-list', [OrderController::class, 'orderList'])->name('order.list');
     Route::get('/print-all-order', [OrderController::class, 'printOrder']);
@@ -176,4 +184,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/search-brand-stock-report', [StockController::class, 'brandFilterStock']);
     Route::get('/product-stock', [StockController::class, 'productStock'])->name('product.stock.report');
     Route::get('/search-product-stock-report', [StockController::class, 'filterProductStock']);
+    Route::get('/add-stock', [StockController::class, 'addStockView'])->name('add.stock.view');
+    Route::post('/add-stock-inventory/{id}', [StockController::class, 'addStockInventory']);
 });

@@ -85,6 +85,7 @@
                     <li><a href="{{ url('/user-sale-report') }}"><i class="far fa-dot-circle me-2"></i>User Sale</a></li>
                     <li><a href="{{ url('/sale-profit-report')}}"><i class="far fa-dot-circle me-2"></i>Profit</a></li>
                     <li><a href="{{ url('/sale-profit-report-by-specified-order')}}"><i class="far fa-dot-circle me-2"></i>Specific Profit</a></li>
+                    <li><a href="{{ url('/top-sale-product')}}"><i class="far fa-dot-circle me-2"></i>Top 50 Sale Item</a></li>
                 </ul>
             </li>
 
@@ -157,6 +158,7 @@
                     <i class="fas fa-angle-down"></i>
                 </a>
                 <ul class="collapse list-unstyled ps-4 mt-1">
+                    <li><a href="{{url('/add-stock')}}"><i class="far fa-dot-circle me-2"></i>Stock Add</a></li>
                     <li><a href="{{url('/total-stock')}}"><i class="far fa-dot-circle me-2"></i>Total Stock</a></li>
                     <li><a href="{{url('/category-stock')}}"><i class="far fa-dot-circle me-2"></i>Category Stock</a></li>
                     <li><a href="{{url('/brank-stock')}}"><i class="far fa-dot-circle me-2"></i>Brand Stock</a></li>

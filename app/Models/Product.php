@@ -45,4 +45,9 @@ class Product extends Model
     public function stock(){
         return $this->hasMany(Stock::class, 'medicine_id', 'id');
     }
+
+    public function damage()
+    {
+        return $this->hasMany(DamageMedicine::class, 'medicine_id');
+    }
 }

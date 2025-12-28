@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 28, 2025 at 05:31 AM
+-- Generation Time: Dec 28, 2025 at 09:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -116,6 +116,27 @@ CREATE TABLE `companies` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `damage_medicines`
+--
+
+CREATE TABLE `damage_medicines` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `medicine_id` bigint(20) UNSIGNED NOT NULL,
+  `batch_no` varchar(255) DEFAULT NULL,
+  `damage_quantity` int(11) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `total_loss` decimal(10,2) NOT NULL,
+  `damage_reason` text DEFAULT NULL,
+  `damage_date` date NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `remarks` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `excategories`
 --
 
@@ -177,28 +198,29 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(44, '2014_10_12_000000_create_users_table', 1),
-(45, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(46, '2014_10_12_100000_create_password_resets_table', 1),
-(47, '2019_08_19_000000_create_failed_jobs_table', 1),
-(48, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(49, '2025_07_22_075738_create_categories_table', 1),
-(50, '2025_07_22_075752_create_brands_table', 1),
-(51, '2025_07_22_075753_create_products_table', 1),
-(52, '2025_07_22_115538_create_stocks_table', 1),
-(53, '2025_07_22_121128_create_payment_methods_table', 1),
-(54, '2025_07_22_121129_create_admins_table', 1),
-(55, '2025_07_22_121130_create_carts_table', 1),
-(56, '2025_07_22_121131_create_orders_table', 1),
-(57, '2025_07_24_051759_create_purchasecarts_table', 1),
-(58, '2025_07_27_044159_create_suppliers_table', 1),
-(59, '2025_07_27_044160_create_purchaseorders_table', 1),
-(60, '2025_07_27_081722_create_purchasereturns_table', 1),
-(61, '2025_07_27_105121_create_purchasereturnorders_table', 1),
-(62, '2025_08_01_062928_create_excategories_table', 1),
-(63, '2025_08_01_062948_create_subexcategories_table', 1),
-(64, '2025_08_01_091727_create_expenses_table', 1),
-(65, '2025_08_02_051037_create_companies_table', 1);
+(46, '2014_10_12_000000_create_users_table', 1),
+(47, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(48, '2014_10_12_100000_create_password_resets_table', 1),
+(49, '2019_08_19_000000_create_failed_jobs_table', 1),
+(50, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(51, '2025_07_22_075738_create_categories_table', 1),
+(52, '2025_07_22_075752_create_brands_table', 1),
+(53, '2025_07_22_075753_create_products_table', 1),
+(54, '2025_07_22_115538_create_stocks_table', 1),
+(55, '2025_07_22_121128_create_payment_methods_table', 1),
+(56, '2025_07_22_121129_create_admins_table', 1),
+(57, '2025_07_22_121130_create_carts_table', 1),
+(58, '2025_07_22_121131_create_orders_table', 1),
+(59, '2025_07_24_051759_create_purchasecarts_table', 1),
+(60, '2025_07_27_044159_create_suppliers_table', 1),
+(61, '2025_07_27_044160_create_purchaseorders_table', 1),
+(62, '2025_07_27_081722_create_purchasereturns_table', 1),
+(63, '2025_07_27_105121_create_purchasereturnorders_table', 1),
+(64, '2025_08_01_062928_create_excategories_table', 1),
+(65, '2025_08_01_062948_create_subexcategories_table', 1),
+(66, '2025_08_01_091727_create_expenses_table', 1),
+(67, '2025_08_02_051037_create_companies_table', 1),
+(68, '2025_12_28_050022_create_damage_medicines_table', 1);
 
 -- --------------------------------------------------------
 
@@ -501,6 +523,14 @@ ALTER TABLE `companies`
   ADD UNIQUE KEY `companies_email_unique` (`email`);
 
 --
+-- Indexes for table `damage_medicines`
+--
+ALTER TABLE `damage_medicines`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `damage_medicines_medicine_id_foreign` (`medicine_id`),
+  ADD KEY `damage_medicines_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `excategories`
 --
 ALTER TABLE `excategories`
@@ -667,6 +697,12 @@ ALTER TABLE `companies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `damage_medicines`
+--
+ALTER TABLE `damage_medicines`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `excategories`
 --
 ALTER TABLE `excategories`
@@ -688,7 +724,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -772,6 +808,13 @@ ALTER TABLE `users`
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_medicine_id_foreign` FOREIGN KEY (`medicine_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `damage_medicines`
+--
+ALTER TABLE `damage_medicines`
+  ADD CONSTRAINT `damage_medicines_medicine_id_foreign` FOREIGN KEY (`medicine_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `damage_medicines_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
 
 --
 -- Constraints for table `expenses`

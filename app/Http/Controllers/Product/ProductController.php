@@ -142,11 +142,6 @@ class ProductController extends Controller
         return view('product.print-expired-list-6-month', compact('product','company','total', 'stock', 'company'));
     }
 
-    public function damageProduct(){
-        $company = Company::first();
-        return view('product.damage-product', compact('company'));
-    }
-
     public function liveSearchOrder(Request $request){
         $output = "";
 

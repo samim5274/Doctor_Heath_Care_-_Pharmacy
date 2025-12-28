@@ -50,16 +50,13 @@
 <body>
 
     <div class="invoice-header">
-        <h1 style="text-align:center;">{{$company[0]->name}}</h1>
-        <p style="text-align:center;">{{$company[0]->address}}</p>
-        <p style="text-align:center;">Mobaile: {{$company[0]->phone}}  website: {{$company[0]->website}}</p>
+        <h1 style="text-align:center;">{{$company->name}}</h1>
+        <p style="text-align:center;">{{$company->address}}</p>
+        <p style="text-align:center;">Mobaile: {{$company->phone}}  website: {{$company->website}}</p>
         <h4>Expired List on 180 days.</h4>
     </div><hr>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-        <p style="margin: 0;">Officer: {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : 'N/A' }}</p>
-        <div class="qrImg">
-            QR-
-        </div>
+        <p style="margin: 0;">Officer: {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : 'N/A' }}</p>        
     </div>
 
     <table class="invoice-table">

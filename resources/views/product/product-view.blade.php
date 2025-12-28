@@ -51,7 +51,7 @@
                                     <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <!-- <th>#</th> -->
                                                 <th scope="col" class="px-0 text-muted"> Name </th>
                                                 <th scope="col" class="px-0 text-muted">Mfg. Date</th>
                                                 <th scope="col" class="px-0 text-muted">Exp. Date</th>
@@ -85,7 +85,7 @@
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->purchase_price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->price}}/-</td>
                                                 <td class="px-0 text-dark fw-medium text-end">৳ {{$val->stock * $val->price}}/-</td>
-                                                <td class="px-0 text-dark fw-medium text-end"><a href="{{url('/edit-product/'.$val->id)}}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit text-primary"></i></a></td>
+                                                <td class="px-0 text-dark fw-medium text-end"><a href="{{url('/edit-product/'.$val->id)}}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>

@@ -116,4 +116,43 @@ class StockController extends Controller
         }
         return view('stock.report.specific-product-stock-report', compact('stock','stockIn','stockOut','totalStock','purchasePrice','salePrice','product'));
     }
+
+    public function addStockView(){
+        $company = Company::first();
+        $data = Product::all();
+        return view('stock.add-stock-view', compact('data','company'));
+    }
+
+    public function addStockInventory(Request $request, $id){
+        $request->validate([
+            'qty'     => 'required|numeric|min:1',
+            'ex_date' => 'required|date',
+        ]);
+
+        $product = Product::find($id);
+        if(!$product){
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+
+        // Update product stock
+        $product->stock += $request->input('qty');
+        $product->expiry_date = $request->input('ex_date');
+        
+        do { $reg = rand(1000000000, 9999999999); }
+        while (Stock::where('reg', $reg)->exists());
+
+        // Create stock entry
+        $stockEntry = new Stock();
+        $stockEntry->reg = $reg;
+        $stockEntry->medicine_id = $id;
+        $stockEntry->stockIn = $request->input('qty');
+        $stockEntry->stockOut = 0;
+        $stockEntry->date = Carbon::now()->toDateString();
+        $stockEntry->status = 3; // 1 sale, 2 return, 3 stock in and 4 stock out
+        $stockEntry->remark = $request->remark.' and Stock In by '.Auth::guard('admin')->user()->name;
+
+        $product->save();
+        $stockEntry->save();
+        return redirect()->back()->with('success', 'Stock added successfully.');
+    }
 }

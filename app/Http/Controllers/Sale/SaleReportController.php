@@ -306,4 +306,24 @@ class SaleReportController extends Controller
         }
         return view('sale.report.user-sale-report', compact('order','total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','user'));
     }
+
+    public function topSaleProduct(){
+        $company = Company::first();
+        $cart = Cart::with('medicine.category')
+            ->get()
+            ->groupBy('medicine_id')
+            ->map(function ($items){
+                return [
+                    'product_name' => optional($items->first()->medicine)->name ?? 'Unknown',
+                    'total_quantity' => $items->sum('qty'),
+                    'total_price' => $items->sum('total_price'),
+                ];
+            })
+            ->sortByDesc('total_quantity') // quantity descending
+            ->take(50); // top 50
+        
+        $grand_total_qty = $cart->sum('total_quantity');
+        $grand_total_price = $cart->sum('total_price');
+        return view('sale.report.top-sale-product-report', compact('cart','grand_total_qty','grand_total_price','company'));
+    }
 }
