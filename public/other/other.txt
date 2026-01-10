@@ -18,3 +18,22 @@ php artisan optimize:clear
 php artisan optimize
 
 php artisan config:clear
+
+
+
+// for production
+/usr/local/bin/ea-php82 /home/haacedub/bin/composer install --no-dev --optimize-autoloader
+
+// shortcut
+echo 'alias composer="/usr/local/bin/ea-php82 /home/haacedub/bin/composer"' >> ~/.bashrc
+source ~/.bashrc
+composer install /
+composer update
+
+cp .env.example .env
+
+/usr/local/bin/ea-php82 artisan key:generate
+/usr/local/bin/ea-php82 artisan migrate
+/usr/local/bin/ea-php82 artisan storage:link
+
+/usr/local/bin/ea-php82 artisan optimize
